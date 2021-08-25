@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import LoginForm from './components/forms/LoginForm';
+import RegisterForm from './components/forms/RegisterForm';
+//import Home from './components/Home';
+import PrivateRoute from './components/PrivateRoute';
+import { AuthContext } from './contexts/AuthContext';
+import Dashboard from './components/DashBoard';
+
 
 function App() {
+
+  const { authState } = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+
+      <Route path='/login'>
+        {authState.isLogged ? <Redirect to="/" /> : <LoginForm />}
+      </Route>
+
+      <Route path='/register'>
+        {authState.isLogged ? <Redirect to="/" /> : <RegisterForm />}
+      </Route>
+
+      <PrivateRoute path='/'>
+        <Dashboard />
+      </PrivateRoute>
+
+    </Switch>
   );
 }
 
