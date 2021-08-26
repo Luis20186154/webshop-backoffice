@@ -7,7 +7,7 @@ import {
     Container, Typography, CssBaseline, AppBar, Toolbar, IconButton, Divider, List, Drawer, Button, ThemeProvider, createTheme
 } from '@material-ui/core';
 import { MainListItems, SecondaryListItems } from './ListItems';
-import Carousel from './Carousel';
+import { CarouselSlider } from './Carousel';
 import Food from './products/food/Food';
 import ProductDetails from './products/ProductDetails';
 import { blueGrey } from '@material-ui/core/colors';
@@ -91,14 +91,12 @@ export default function Dashboard() {
                 <List>
                     <MainListItems />
                 </List>
-                <Divider />
-                <List>{SecondaryListItems}</List>
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Switch>
-                        <Route exact path='/' component={Carousel} />
+                        <Route exact path='/' component={CarouselSlider} />
                         <Route exact path='/products/food' component={Food} />
                         <Route exact path='/products/drink' component={Drinks} />
                         <Route exact path='/products/:id/details' component={ProductDetails} />
